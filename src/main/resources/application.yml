@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: prod
+
+bot: {
+  name: "telegramBotName",
+  token: "telegramBotToken",
+}
+api: {
+  token: "CoinMarketCapToken"
+}
+
+fns: {
+  device: "DeviceId",
+  os: "Linux",
+  login: "Login",
+  password: "Password"
+}
+
+
+
