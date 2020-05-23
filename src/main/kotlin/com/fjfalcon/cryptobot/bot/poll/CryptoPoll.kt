@@ -5,13 +5,14 @@ import com.fjfalcon.cryptobot.bot.handler.CheckHandler
 import com.fjfalcon.cryptobot.bot.handler.CoinsHandler
 import com.fjfalcon.cryptobot.bot.handler.PriceHandler
 import com.fjfalcon.cryptobot.coinmarketcap.ApiKeeper
-import org.springframework.stereotype.Component
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Update
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Component
-class CryptoPoll constructor(
+@Singleton
+class CryptoPoll @Inject constructor(
     private val botProperties: BotProperties,
     private val apiKeeper: ApiKeeper,
     private val coinsHandler: CoinsHandler,
@@ -19,8 +20,8 @@ class CryptoPoll constructor(
     private val checkHandler: CheckHandler
 ) : TelegramLongPollingBot() {
 
-    override fun getBotToken(): String = botProperties.token
-    override fun getBotUsername(): String = botProperties.name
+    override fun getBotToken(): String = botProperties.token!!
+    override fun getBotUsername(): String = botProperties.name!!
     override fun onUpdateReceived(update: Update) {
         if (update.hasMessage() && update.message.hasText()) {
             parseUpdate(update, update.message.text)
@@ -34,6 +35,7 @@ class CryptoPoll constructor(
             priceHandler.parseText(update, text)
         )
         startsWithCheck(text) -> sendText(update, checkHandler.parseText(update, text))
+        text.startsWith("/ping") -> sendText(update, "pong")
         else -> Unit
     }
 

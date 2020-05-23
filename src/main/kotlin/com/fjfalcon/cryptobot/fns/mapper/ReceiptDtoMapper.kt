@@ -4,9 +4,9 @@ import com.fjfalcon.cryptobot.fns.model.ItemDtoV2
 import com.fjfalcon.cryptobot.fns.model.ReceiptDto
 import com.fjfalcon.cryptobot.fns.model.ReceiptDtoV2
 import java.math.BigDecimal
-import org.springframework.stereotype.Component
+import javax.inject.Singleton
 
-@Component
+@Singleton
 class ReceiptDtoMapper {
 
     fun toDtoV2(receiptDto: ReceiptDto?): ReceiptDtoV2 {

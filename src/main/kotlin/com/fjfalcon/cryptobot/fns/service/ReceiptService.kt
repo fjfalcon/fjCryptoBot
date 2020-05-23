@@ -4,19 +4,19 @@ import com.fjfalcon.cryptobot.fns.mapper.ReceiptDtoMapper
 import com.fjfalcon.cryptobot.fns.model.ReceiptData
 import com.fjfalcon.cryptobot.fns.model.ReceiptState
 import com.fjfalcon.cryptobot.fns.model.Requisites
+import io.micronaut.http.HttpStatus
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.http.HttpStatus
-import org.springframework.stereotype.Component
+import javax.inject.Singleton
 
 val logger: Logger = LoggerFactory.getLogger(ReceiptService::class.java)
 
-@Component
+@Singleton
 class ReceiptService(
-    val apiService: ApiService,
-    val receiptDtoMapper: ReceiptDtoMapper
+    private val apiService: ApiService,
+    private val receiptDtoMapper: ReceiptDtoMapper
 ) {
-    val pipeline = mapOf(
+    private val pipeline = mapOf(
         Pair(ReceiptState.NEW, ::parseNewState),
         Pair(ReceiptState.REGISTERED, ::parseRegistered),
         Pair(ReceiptState.FIRST_TIME_SENT, ::parseRegistered),

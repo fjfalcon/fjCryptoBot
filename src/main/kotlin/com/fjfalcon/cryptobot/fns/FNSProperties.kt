@@ -1,8 +1,11 @@
 package com.fjfalcon.cryptobot.fns
 
-import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
+import io.micronaut.context.annotation.ConfigurationProperties
 
-@ConstructorBinding
-@ConfigurationProperties(prefix = "fns")
-data class FNSProperties(val device: String, val os: String, val login: String, val password: String)
+@ConfigurationProperties("fns")
+class FNSProperties {
+    var os: String? = null
+    var device: String? = null
+    var login: String? = null
+    var password: String? = null
+}

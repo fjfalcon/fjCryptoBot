@@ -1,22 +1,16 @@
 package com.fjfalcon.cryptobot
 
-import com.fjfalcon.cryptobot.bot.BotProperties
-import com.fjfalcon.cryptobot.coinmarketcap.ApiProperties
-import com.fjfalcon.cryptobot.fns.FNSProperties
-import org.springframework.boot.SpringApplication
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.EnableConfigurationProperties
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.scheduling.annotation.EnableScheduling
+import io.micronaut.runtime.Micronaut
 import org.telegram.telegrambots.ApiContextInitializer
 
-@SpringBootApplication
-@ComponentScan(basePackages = ["com.fjfalcon"])
-@EnableConfigurationProperties(ApiProperties::class, BotProperties::class, FNSProperties::class)
-@EnableScheduling
-class CryptoBotApplication
+object CryptoBotApplication {
 
-fun main(args: Array<String>) {
-    ApiContextInitializer.init()
-    SpringApplication.run(CryptoBotApplication::class.java, *args)
+    @JvmStatic
+    fun main(args: Array<String>) {
+        ApiContextInitializer.init()
+        Micronaut.build()
+            .packages("com.fjfalcon.cryptobot")
+            .mainClass(CryptoBotApplication.javaClass)
+            .start()
+    }
 }

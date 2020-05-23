@@ -3,17 +3,17 @@ package com.fjfalcon.cryptobot.bot.handler
 import com.fjfalcon.cryptobot.fns.model.ReceiptState
 import com.fjfalcon.cryptobot.fns.model.Requisites
 import com.fjfalcon.cryptobot.fns.service.ReceiptService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.telegram.telegrambots.meta.api.objects.Update
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
-import org.telegram.telegrambots.meta.api.objects.Update
+import javax.inject.Singleton
 
 val logger: Logger = LoggerFactory.getLogger(CheckHandler::class.java)
 
-@Component
+@Singleton
 class CheckHandler(val receiptService: ReceiptService) : Handler {
     val regex = "^t=(.*)&s=(.*)&fn=(.*)&i=(.*)&fp=(.*)&n=(.*)\$".toRegex()
 

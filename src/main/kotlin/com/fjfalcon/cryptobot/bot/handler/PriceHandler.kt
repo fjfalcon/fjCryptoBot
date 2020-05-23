@@ -2,12 +2,12 @@ package com.fjfalcon.cryptobot.bot.handler
 
 import com.fjfalcon.cryptobot.coinmarketcap.ApiKeeper
 import com.fjfalcon.cryptobot.coinmarketcap.Coin
+import org.telegram.telegrambots.meta.api.objects.Update
 import java.math.BigDecimal
 import java.math.RoundingMode
-import org.springframework.stereotype.Component
-import org.telegram.telegrambots.meta.api.objects.Update
+import javax.inject.Singleton
 
-@Component
+@Singleton
 class PriceHandler(private val apiKeeper: ApiKeeper) : Handler {
     override fun parseText(update: Update, text: String): String =
         prepareText(

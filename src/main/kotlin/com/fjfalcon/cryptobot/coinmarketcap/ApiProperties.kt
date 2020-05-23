@@ -1,8 +1,8 @@
 package com.fjfalcon.cryptobot.coinmarketcap
 
-import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
+import io.micronaut.context.annotation.ConfigurationProperties
 
-@ConstructorBinding
-@ConfigurationProperties(prefix = "api")
-data class ApiProperties(val token: String)
+@ConfigurationProperties("api")
+class ApiProperties {
+    var token: String? = null
+}

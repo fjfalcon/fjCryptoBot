@@ -1,9 +1,9 @@
 package com.fjfalcon.cryptobot.fns.model
 
+import io.micronaut.http.HttpStatus
 import java.math.BigDecimal
-import org.springframework.http.HttpStatus
 
-data class ApiResponse(var document: Document?, var error: String?, var httpStatus: HttpStatus?)
+data class ApiResponse(var document: Document?, var error: String?, var httpStatus: HttpStatus = HttpStatus.OK)
 data class Document(var receipt: ReceiptDto?)
 
 data class ReceiptDto(

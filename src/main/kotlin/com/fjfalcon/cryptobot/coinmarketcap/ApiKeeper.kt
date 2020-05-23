@@ -1,16 +1,16 @@
 package com.fjfalcon.cryptobot.coinmarketcap
 
-import org.springframework.scheduling.annotation.Scheduled
-import org.springframework.stereotype.Component
+import io.micronaut.scheduling.annotation.Scheduled
+import javax.inject.Singleton
 
 /**
  * Created by fjfalcon on 14.05.17.
  */
-@Component
+@Singleton
 class ApiKeeper(private val client: ApiClient) {
     internal var result = emptyMap<String, Coin>()
 
-    @Scheduled(fixedDelay = 60 * 1000 * 60)
+    @Scheduled(fixedDelay = "5h")
     fun update() {
         val tmp = client.makeCoinMarketCapApiRequest()
         if (tmp != null) {

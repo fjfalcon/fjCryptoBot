@@ -2,11 +2,11 @@ package com.fjfalcon.cryptobot.bot.handler
 
 import com.fjfalcon.cryptobot.coinmarketcap.ApiKeeper
 import com.fjfalcon.cryptobot.coinmarketcap.Coin
-import org.springframework.scheduling.annotation.Scheduled
-import org.springframework.stereotype.Component
+import io.micronaut.scheduling.annotation.Scheduled
 import org.telegram.telegrambots.meta.api.objects.Update
+import javax.inject.Singleton
 
-@Component
+@Singleton
 class CoinsHandler(private val apiKeeper: ApiKeeper) : Handler {
     private var message: String = ""
 
@@ -17,7 +17,7 @@ class CoinsHandler(private val apiKeeper: ApiKeeper) : Handler {
             "К сожалению данная команда доступна только в чате бота"
         }
 
-    @Scheduled(initialDelay = 5 * 1000, fixedDelay = 1000 * 60 * 10)
+    @Scheduled(initialDelay = "15s", fixedDelay = "10m")
     fun update() {
         message = apiKeeper.result.values.sortedWith(compareBy { it.cmcRank })
             .joinToString("\n", limit = 100, transform = this::jsonObjectToString)
